@@ -1,0 +1,15 @@
+FROM duluca/minimal-node-web-server
+
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
+
+ENV ENFORCE_HTTPS=xProto
+
+WORKDIR /usr/src/app
+COPY ./package.json ./
+RUN yarn
+COPY . .
+
+EXPOSE 8080
+EXPOSE 3000
+CMD ["yarn", "run", "start"]
